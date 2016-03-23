@@ -88,6 +88,10 @@
         </dependency>
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
+            <artifactId>codenvy-plugin-github-webhooks</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.codenvy.plugin</groupId>
             <artifactId>codenvy-plugin-google-oauth2</artifactId>
         </dependency>
         <dependency>
@@ -96,11 +100,7 @@
         </dependency>
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
-            <artifactId>codenvy-plugin-webhooks-github</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.codenvy.plugin</groupId>
-            <artifactId>codenvy-plugin-webhooks-vsts</artifactId>
+            <artifactId>codenvy-plugin-microsoft-vsts-webhooks</artifactId>
         </dependency>
         <dependency>
             <groupId>com.codenvy.plugin</groupId>
