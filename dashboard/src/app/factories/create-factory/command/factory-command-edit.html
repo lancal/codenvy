@@ -1,0 +1,18 @@
+<md-dialog flex="50" class="factory-add-action-dialog">
+  <form name="editActionForm">
+    <md-dialog-content>
+      <che-input focusable
+                 che-name="Editing"
+                 che-form="editActionForm"
+                 che-label-name="Param"
+                 required
+                 ng-model="factoryCommandDialogEditCtrl.selectedValue">
+        <div ng-message="required">Param is required</div>
+      </che-input>
+    </md-dialog-content>
+    <div class="md-actions">
+      <md-button ng-click="factoryCommandDialogEditCtrl.abort()" tabindex="0" type="button">Cancel</md-button>
+      <md-button class="md-primary" ng-click="factoryCommandDialogEditCtrl.edit()" ng-disabled="editActionForm.$invalid">Edit</md-button>
+    </div>
+  </form>
+</md-dialog>

@@ -23,6 +23,17 @@ import {FactoryFromFileCtrl} from '../create-factory/config-file-tab/factory-fro
 import {FactoryFromFile} from '../create-factory/config-file-tab/factory-from-file.directive';
 import {FactoryFromTemplateCtrl} from '../create-factory/template-tab/factory-from-template.controller';
 import {FactoryFromTemplate} from '../create-factory/template-tab/factory-from-template.directive';
+import {FactoryActionCtrl} from './action/factory-action-widget.controller';
+import {FactoryAction} from './action/factory-action-widget.directive';
+import {FactoryActionBoxCtrl} from './action/factory-action-box.controller';
+import {FactoryActionBox} from './action/factory-action-box.directive';
+import {FactoryActionDialogAddCtrl} from './action/factory-action-widget-dialog-add.controller';
+import {FactoryActionDialogEditCtrl} from './action/factory-action-widget-dialog-edit.controller';
+import {FactoryCommandCtrl} from './command/factory-command.controller';
+import {FactoryCommand} from './command/factory-command.directive';
+import {FactoryCommandDialogEditCtrl} from './command/factory-command-edit.controller';
+import {CreateFactoryGitCtrl} from './git/create-factory-git.controller';
+import {CreateFactoryGit} from './git/create-factory-git.directive';
 
 export class CreateFactoryConfig {
 
@@ -38,6 +49,24 @@ export class CreateFactoryConfig {
 
     register.controller('FactoryFromTemplateCtrl', FactoryFromTemplateCtrl);
     register.directive('cdvyFactoryFromTemplate', FactoryFromTemplate);
+
+    register.controller('FactoryActionBoxCtrl', FactoryActionBoxCtrl);
+    register.directive('cdvyFactoryActionBox', FactoryActionBox);
+
+    register.controller('FactoryActionCtrl', FactoryActionCtrl);
+    register.directive('cdvyFactoryAction', FactoryAction);
+
+    register.controller('FactoryCommandCtrl', FactoryCommandCtrl);
+    register.directive('cdvyFactoryCommand', FactoryCommand);
+
+    register.controller('CreateFactoryGitCtrl', CreateFactoryGitCtrl);
+    register.directive('cdvyCreateFactoryGit', CreateFactoryGit);
+
+    register.controller('FactoryActionDialogAddCtrl', FactoryActionDialogAddCtrl);
+    register.controller('FactoryActionDialogEditCtrl', FactoryActionDialogEditCtrl);
+    register.controller('FactoryCommandDialogEditCtrl', FactoryCommandDialogEditCtrl);
+
+
 
     // config routes
     register.app.config(function ($routeProvider) {

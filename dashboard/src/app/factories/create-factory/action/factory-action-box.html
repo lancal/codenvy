@@ -1,0 +1,30 @@
+<div class="factory-actions-panel-box" layout="column">
+
+  <div class="factory-actions-panel-box-title">{{factoryActionBoxCtrl.lifecycle}}</div>
+
+  <div>
+    <div layout-align="center center">
+      <md-button class="md-fab" aria-label="add command" ng-click="factoryActionBoxCtrl.addAction($event);">
+        <span class="fa fa-plus"></span>
+      </md-button>
+      Add Factory Action
+    </div>
+  </div>
+
+  <div ng-repeat="action in factoryActionBoxCtrl.factoryObject.ide[factoryActionBoxCtrl.lifecycle].actions">
+    <!-- open File -->
+    <cdvy-factory-action cdvy-action-group="{{factoryActionBoxCtrl.lifecycle}}"
+                         cdvy-action-name="openFile"
+                         cdvy-action-property="file"
+                         cdvy-action="action"
+                         cdvy-callback-controller="factoryActionBoxCtrl.callbackController"
+                         cdvy-action-icon="fa fa-pencil-square-o"></cdvy-factory-action>
+    <!-- Run Command -->
+    <cdvy-factory-action cdvy-action-group="{{factoryActionBoxCtrl.lifecycle}}"
+                         cdvy-action-name="runCommand"
+                         cdvy-action-property="name"
+                         cdvy-action="action"
+                         cdvy-callback-controller="factoryActionBoxCtrl.callbackController"
+                         cdvy-action-icon="fa fa-play"></cdvy-factory-action>
+  </div>
+</div>

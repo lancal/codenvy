@@ -22,8 +22,32 @@
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <md-progress-linear md-mode="indeterminate" class="create-factory-progress" ng-show="createFactoryCtrl.isLoading"></md-progress-linear>
   <div class="create-factory" ng-hide="createFactoryCtrl.isLoading">
-    <che-panel che-title="Select Source">
+    <che-panel che-title="Select Source"
+               che-tooltip="Choose where the initial source code for this project will come from.">
       <md-tabs md-dynamic-height md-stretch-tabs="always" md-selected="selectedIndex" class="project-details-menu">
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-font-icon="fa-git" class="fa che-tab-label-icon"></md-icon>
+            <span class="che-tab-label-title">Git Repository</span>
+          </md-tab-label>
+          <md-tab-body>
+            <cdvy-create-factory-git cdvy-git-location="createFactoryCtrl.gitLocation" layout="column"></cdvy-create-factory-git>
+          </md-tab-body>
+        </md-tab>
+        <md-tab>
+          <md-tab-label>
+            <md-icon md-font-icon="fa-github" class="fa che-tab-label-icon"></md-icon>
+            <span class="che-tab-label-title">Github</span>
+          </md-tab-label>
+          <md-tab-body>
+            <form name="createFactoryGitHubForm" >
+              <create-project-github che-form="createFactoryGitHubForm"
+                                     che-repository-model="createFactoryCtrl.selectedGitHubRepository"
+                                     che-repository-select="createFactoryCtrl.selectGitHubRepository()"
+                                     layout="column"></create-project-github>
+            </form>
+          </md-tab-body>
+        </md-tab>
         <md-tab>
           <md-tab-label>
             <md-icon md-font-icon="fa fa-server" class="che-tab-label-icon"></md-icon>
@@ -57,7 +81,46 @@
         </md-tab>
       </md-tabs>
     </che-panel>
-    <che-panel che-title="Factory Configuration" ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
+
+
+    <che-panel che-title="Select Stack"
+               che-tooltip="Stacks are recipes or images used to define your environment runtime. Workspace environments are used to build and run your project.">
+      <che-workspace-select-stack che-tab-name="tabName"
+                                  che-on-tab-change="createFactoryCtrl.setStackTab(tabName)"
+                                  che-stack="stack"
+                                  che-stack-change="createFactoryCtrl.cheStackLibrarySelecter(stack)"
+                                  che-recipe-script="createFactoryCtrl.recipeScript"
+                                  che-recipe-url="createFactoryCtrl.recipeUrl"/>
+    </che-panel>
+
+    <che-panel che-title="Commands"
+               che-tooltip="Commands are processes that are invoked by users from a dropdown in the IDE.">
+      <div class="factory-commands-panel">
+        <md-content layout="column" layout-fill>
+          <cdvy-factory-command cdvy-factory-object="createFactoryCtrl.factoryObject"></cdvy-factory-command>
+        </md-content>
+      </div>
+    </che-panel>
+
+    <che-panel che-title="IDE Actions"
+               che-tooltip="Tell the IDE to perform additional actions after the workspace is loaded.">
+      <div class="factory-actions-panel">
+        <md-content layout="row" layout-fill>
+          <cdvy-factory-action-box cdvy-lifecycle="onProjectsLoaded"
+                                   cdvy-callback-controller="createFactoryCtrl"
+                                   cdvy-factory-object="createFactoryCtrl.factoryObject"
+                                   flex="40"></cdvy-factory-action-box>
+          <cdvy-factory-action-box cdvy-lifecycle="onAppLoaded"
+                                   cdvy-callback-controller="createFactoryCtrl"
+                                   cdvy-factory-object="createFactoryCtrl.factoryObject"
+                                   flex="40"></cdvy-factory-action-box>
+        </md-content>
+      </div>
+    </che-panel>
+
+
+    <che-panel che-title="Factory Configuration"
+               ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
       <div class="factory-configuration-panel">
         <md-content layout="column" layout-fill>
           <div class="json-editor" ng-if="createFactoryCtrl.factoryContent !== null">
