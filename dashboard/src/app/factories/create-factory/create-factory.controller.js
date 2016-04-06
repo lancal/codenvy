@@ -35,9 +35,9 @@ export class CreateFactoryCtrl {
     this.isLoading = false;
     this.isImporting = false;
 
-    // once source is selected, go into edit mode
-    this.title = 'Factory Create Wizard';
-    this.flow = 'init';
+    // at first, we're in source mode
+    this.title = 'New Factory';
+    this.flow = 'source';
 
     this.factoryContent = null;
     $scope.$watch('createFactoryCtrl.factoryContent', (newValue) => {
@@ -131,13 +131,6 @@ export class CreateFactoryCtrl {
       this.cheNotification.showError(error.data.message ? error.data.message : 'Create factory failed.');
       console.log('error', error);
     });
-  }
-
-
-  initFlow() {
-    this.flow = 'source';
-    this.title = 'New Factory';
-
   }
 
   /**

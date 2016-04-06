@@ -29,11 +29,10 @@ md-progress-linear.create-factory-progress
 
 
 che-button-primary#create-factory-next-button button
-  margin-top 30px
-  margin-left 24px
+  margin-top 10px
+  margin-right 24px
   margin-bottom 100px
   font-size 1.2em
-  width calc(100% - 48px) !important
 
 //  box-shadow 0 1px 1px 0 $primary-color
 
@@ -60,7 +59,10 @@ che-button-primary#create-factory-next-button button
   height 18px
   font-size 0.9em
   margin-right 15px
-  border-radius 4px
+  padding-left 10px
+  padding-right 10px
+  border 1px solid $label-info-color
+  border-radius 2px
 
 .create-factory-share-header-widget-clipboard
   font-size 1.3em
@@ -76,12 +78,6 @@ md-card.create-factory-factory-information-card
   font-size 1.1em
   font-family sans-serif
 
-.create-factory-share-header-widget-info
-  margin-bottom 10px
-  font-size 0.9em
-  font-style italic
-
-
 md-tabs.factory-select-source-details:not(.md-no-tab-content):not(.md-dynamic-height)
   min-height 448px
 
@@ -95,10 +91,10 @@ md-tabs.factory-select-source-details md-tab-content > div:first-child
   font-size 9pt
   cursor pointer
   height 18px
-  background-color $default-color
-  color $label-secondary-color
+  background-color $primary-color
+  color $white-color
   border-radius 2px
 
 .create-factory-share-header-small-button:hover
-  color $label-secondary-color
+  color $white-color
   text-decoration none

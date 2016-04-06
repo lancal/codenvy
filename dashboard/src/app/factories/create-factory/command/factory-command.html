@@ -29,7 +29,7 @@
         <div ng-message="minlength">The name has to be more than 1 character long.</div>
         <div ng-message="maxlength">The name has to be less than 500 characters long.</div>
       </che-input>
-      <che-button-primary che-button-title="Add Command"
+      <che-button-primary che-button-title="Add"
                           ng-click="factoryCommandCtrl.addCommand()"
                           ng-disabled="commandsForm.$invalid"></che-button-primary>
     </div>
@@ -41,15 +41,15 @@
     <che-list>
       <che-list-item ng-repeat="command in factoryCommandCtrl.factoryObject.workspace.commands" flex-gt-sm="100" flex="33" ng-mouseover="hover=true" ng-mouseout="hover=false">
         <div layout-gt-sm="row" flex="100" layout-align="start center">
-          <div flex="10" class="" layout-align="center center">
-            <md-icon ng-show="hover" class="factory-commands-widget-actionicons" md-font-icon="fa fa-times-circle" ng-click="factoryCommandCtrl.removeCommand($index)"></md-icon>
-            <md-icon ng-show="hover" class="factory-commands-widget-actionicons" md-font-icon="fa fa-edit" ng-click="factoryCommandCtrl.editCommand($event, $index)"></md-icon>
-          </div>
           <div flex="30" layout="column" layout-align-gt="start center" layout-align-md="start center" layout-align-sm="center center">
             {{command.name}}
           </div>
           <div flex="80" layout-align="center center" class="factory-commands-widget-commandline" ng-click="factoryCommandCtrl.editCommand($event, $index)">
             {{command.commandLine}}
+          </div>
+          <div flex="10" class="" layout-align="center center">
+            <md-icon ng-show="hover" class="factory-commands-widget-actionicons" md-font-icon="fa fa-times-circle" ng-click="factoryCommandCtrl.removeCommand($index)"></md-icon>
+            <md-icon ng-show="hover" class="factory-commands-widget-actionicons" md-font-icon="fa fa-edit" ng-click="factoryCommandCtrl.editCommand($event, $index)"></md-icon>
           </div>
         </div>
       </che-list-item>

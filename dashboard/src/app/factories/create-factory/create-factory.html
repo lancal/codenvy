@@ -21,50 +21,25 @@
 <div flex class="create-factory-share-header-widget" ng-if="createFactoryCtrl.flow === 'configure'" layout-align="center center" layout="column">
   <div layout="row" layout-fill layout-align="start center">
     <div class="create-factory-share-header-widget-icon"><i class="chefont cheico-rocket-chefont icon">&nbsp;</i></div>
-    <div layout="column">
-      <div class="create-factory-share-header-widget-info" layout="row" layout-fill layout-align="start start">Factory has been successfully created and is available. You might want to configure further details. It will update it.</div>
-      <div layout="row" layout-align="start center">
-        <div class="create-factory-share-header-widget-title">Share This Factory :</div>
-        <div class="create-factory-share-header-widget-badge"><a href="{{createFactoryCtrl.factoryLink}}"><img src="{{createFactoryCtrl.factoryBadgeUrl}}"></a></div>
-        <input class="create-factory-share-header-widget-markdown" readonly size="80" value="{{createFactoryCtrl.factoryLink}}">
-        <a class="create-factory-share-header-small-button" tooltip="{{valueLinkCopy === createFactoryCtrl.factoryLink ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.factoryLink" clip-click="valueLinkCopy=createFactoryCtrl.factoryLink">Copy URL</a>
-        <a class="create-factory-share-header-small-button" tooltip="{{valueMDCopy === createFactoryCtrl.markdown ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.markdown" clip-click="valueMDCopy=createFactoryCtrl.markdown">Copy Markdown</a>
-      </div>
+    <div layout="row" layout-fill layout-align="center center">
+      <div class="create-factory-share-header-widget-title">Share This Factory :</div>
+      <div class="create-factory-share-header-widget-badge"><a href="{{createFactoryCtrl.factoryLink}}"><img src="{{createFactoryCtrl.factoryBadgeUrl}}"></a></div>
+      <div class="create-factory-share-header-widget-markdown">{{createFactoryCtrl.factoryLink}}</div>
+      <a class="create-factory-share-header-small-button" tooltip="{{valueLinkCopy === createFactoryCtrl.factoryLink ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.factoryLink" clip-click="valueLinkCopy=createFactoryCtrl.factoryLink">Copy URL</a>
+      <a class="create-factory-share-header-small-button" tooltip="{{valueMDCopy === createFactoryCtrl.markdown ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.markdown" clip-click="valueMDCopy=createFactoryCtrl.markdown">Copy Markdown</a>
     </div>
   </div>
 </div>
 
+
 <md-content md-scroll-y flex md-theme="maincontent-theme">
   <md-progress-linear md-mode="indeterminate" class="create-factory-progress" ng-show="createFactoryCtrl.isLoading"></md-progress-linear>
   <div class="create-factory" ng-hide="createFactoryCtrl.isLoading">
-    <div ng-if="createFactoryCtrl.flow === 'init'">
-
-      <md-card class="create-factory-factory-information-card">
-        <md-card-content>
-          <div>
-            <div layout="row" layout-align="center center">
-              <img alt="factory" src="assets/images/factory2.png">
-            </div>
-            Codenvy Factories are one of the best ways to increase project collaboration.<br> A Factory is a template used to generate new
-            or open existing workspaces with a consumer-friendly URL. Factories can be used to clone existing workspaces or with recipes to
-            repeatedly generate consistent workspaces.
-          </div>
-          More details on factories are available in the <a href="https://codenvy.readme.io/docs/factories" target="_blank">Factory
-          reference documentation</a>
-        </md-card-content>
-        <md-card-footer>
-          Let's create a factory.
-          <che-button-primary che-button-title="Start"
-                              ng-click="createFactoryCtrl.initFlow()" />
-
-        </md-card-footer>
-      </md-card>
-    </div>
     <div ng-show="createFactoryCtrl.flow === 'source'">
 
       <che-panel che-title="Select Source"
                  che-tooltip="Choose where the initial source code for this project will come from.">
-        <md-tabs md-dynamic-height="false" md-stretch-tabs="never" md-center-tabs="false" md-selected="selectedIndex" md-border-bottom="true" class="factory-select-source-details">
+        <md-tabs md-dynamic-height="true" md-stretch-tabs="never" md-center-tabs="false" md-selected="selectedIndex" md-border-bottom="true" class="factory-select-source-details">
           <md-tab>
             <md-tab-label>
               <md-icon md-font-icon="fa-git" class="fa che-tab-label-icon"></md-icon>
@@ -128,10 +103,12 @@
         </md-tabs>
       </che-panel>
 
+      <div layout="row" layout-align="end end">
       <che-button-primary id="create-factory-next-button"
                           che-button-title="Next"
                           ng-click="createFactoryCtrl.createFactoryByContent(createFactoryCtrl.factoryContent)"
                           ng-disabled="!createFactoryCtrl.factoryContent || createFactoryCtrl.isImporting || createFactoryCtrl.isLoading" />
+      </div>
     </div>
     <div ng-if="createFactoryCtrl.flow === 'configure'">
 
@@ -177,26 +154,24 @@
         </div>
       </che-panel>
 
-      <che-panel che-title="Configure IDE Actions"
+      <che-panel che-title="Configure Actions"
                  che-tooltip="Tell the IDE to perform additional actions after the workspace is loaded.">
         <div class="factory-actions-panel">
-          <md-content layout="row" layout-fill>
-            <cdvy-factory-action-box cdvy-lifecycle="onProjectsLoaded"
-                                     cdvy-action-title="Actions executed after projects are loaded"
-                                     cdvy-callback-controller="createFactoryCtrl"
-                                     cdvy-factory-object="createFactoryCtrl.factoryObject"
-                                     flex="40"></cdvy-factory-action-box>
+          <md-content layout="column" layout-fill>
             <cdvy-factory-action-box cdvy-lifecycle="onAppLoaded"
                                      cdvy-action-title="Actions executed after IDE is loaded"
                                      cdvy-callback-controller="createFactoryCtrl"
-                                     cdvy-factory-object="createFactoryCtrl.factoryObject"
-                                     flex="40"></cdvy-factory-action-box>
+                                     cdvy-factory-object="createFactoryCtrl.factoryObject"></cdvy-factory-action-box>
+            <cdvy-factory-action-box cdvy-lifecycle="onProjectsLoaded"
+                                     cdvy-action-title="Actions executed after projects are loaded"
+                                     cdvy-callback-controller="createFactoryCtrl"
+                                     cdvy-factory-object="createFactoryCtrl.factoryObject"></cdvy-factory-action-box>
           </md-content>
         </div>
       </che-panel>
 
 
-      <che-panel che-title="JSON Configuration"
+      <che-panel che-title="JSON"
                  ng-class="{ 'disabled-state': !createFactoryCtrl.factoryContent }">
         <div class="factory-configuration-panel">
           <md-content layout="column" layout-fill>
