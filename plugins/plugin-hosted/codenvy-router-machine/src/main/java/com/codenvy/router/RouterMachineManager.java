@@ -27,6 +27,7 @@ import org.eclipse.che.api.machine.server.exception.MachineException;
 import org.eclipse.che.api.machine.server.model.impl.MachineImpl;
 import org.eclipse.che.api.machine.server.model.impl.MachineRuntimeInfoImpl;
 import org.eclipse.che.api.machine.server.model.impl.ServerImpl;
+import org.eclipse.che.api.machine.server.util.DownloadRecipeUtil;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -49,9 +50,9 @@ public class RouterMachineManager extends MachineManager {
     private final String                   machineLogsDir;
     private final EventService             eventService;
     private final int                      defaultMachineMemorySizeMB;
-    private final String                   apiEndpoint;
     private final RouterRulesRegistry      routerRulesRegistry;
     private final WsAgentLauncher          wsAgentLauncher;
+    private final DownloadRecipeUtil       downloadRecipeUtil;
 
     @Inject
     public RouterMachineManager(SnapshotDao snapshotDao,
@@ -60,26 +61,26 @@ public class RouterMachineManager extends MachineManager {
                                 @Named("machine.logs.location") String machineLogsDir,
                                 EventService eventService,
                                 @Named("machine.default_mem_size_mb") int defaultMachineMemorySizeMB,
-                                @Named("api.endpoint") String apiEndpoint,
                                 RouterRulesRegistry routerRulesRegistry,
-                                WsAgentLauncher wsAgentLauncher) {
+                                WsAgentLauncher wsAgentLauncher,
+                                DownloadRecipeUtil downloadRecipeUtil) {
         super(snapshotDao,
               machineRegistry,
               machineInstanceProviders,
               machineLogsDir,
               eventService,
               defaultMachineMemorySizeMB,
-              apiEndpoint,
-              wsAgentLauncher);
+              wsAgentLauncher,
+              downloadRecipeUtil);
         this.snapshotDao = snapshotDao;
         this.machineRegistry = machineRegistry;
         this.machineInstanceProviders = machineInstanceProviders;
         this.machineLogsDir = machineLogsDir;
         this.eventService = eventService;
         this.defaultMachineMemorySizeMB = defaultMachineMemorySizeMB;
-        this.apiEndpoint = apiEndpoint;
         this.routerRulesRegistry = routerRulesRegistry;
         this.wsAgentLauncher = wsAgentLauncher;
+        this.downloadRecipeUtil = downloadRecipeUtil;
     }
 
     /**
@@ -92,9 +93,9 @@ public class RouterMachineManager extends MachineManager {
              manager.machineLogsDir,
              manager.eventService,
              manager.defaultMachineMemorySizeMB,
-             manager.apiEndpoint,
              manager.routerRulesRegistry,
-             manager.wsAgentLauncher);
+             manager.wsAgentLauncher,
+             manager.downloadRecipeUtil);
     }
 
     private Map<String, ServerImpl> rewriteServersUrls(String machineId, Map<String, ? extends Server> servers) {
