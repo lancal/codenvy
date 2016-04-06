@@ -39,12 +39,10 @@ export class FactoryActionBox {
     this.scope = {
       lifecycle: '@cdvyLifecycle',
       actionTitle: '@cdvyActionTitle',
-      callbackController : '=cdvyCallbackController',
+      callbackController: '=cdvyCallbackController',
       factoryObject: '=cdvyFactoryObject'
     };
   }
-
-
 
 
 }

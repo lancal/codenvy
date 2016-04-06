@@ -27,8 +27,8 @@
         <div class="create-factory-share-header-widget-title">Share This Factory :</div>
         <div class="create-factory-share-header-widget-badge"><a href="{{createFactoryCtrl.factoryLink}}"><img src="{{createFactoryCtrl.factoryBadgeUrl}}"></a></div>
         <input class="create-factory-share-header-widget-markdown" readonly size="80" value="{{createFactoryCtrl.factoryLink}}">
-        <a class="che-footer-button-mail che-footer-button" tooltip="{{valueLinkCopy === createFactoryCtrl.factoryLink ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.factoryLink" clip-click="valueLinkCopy=createFactoryCtrl.factoryLink">Copy URL</a>
-        <a class="che-footer-button-community che-footer-button" tooltip="{{valueMDCopy === createFactoryCtrl.markdown ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.markdown" clip-click="valueMDCopy=createFactoryCtrl.markdown">Copy Markdown</a>
+        <a class="create-factory-share-header-small-button" tooltip="{{valueLinkCopy === createFactoryCtrl.factoryLink ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.factoryLink" clip-click="valueLinkCopy=createFactoryCtrl.factoryLink">Copy URL</a>
+        <a class="create-factory-share-header-small-button" tooltip="{{valueMDCopy === createFactoryCtrl.markdown ? 'Copied' : 'Copy'}}" clip-copy="createFactoryCtrl.markdown" clip-click="valueMDCopy=createFactoryCtrl.markdown">Copy Markdown</a>
       </div>
     </div>
   </div>
@@ -145,6 +145,28 @@
                                     che-recipe-script="createFactoryCtrl.recipeScript"
                                     che-recipe-url="createFactoryCtrl.recipeUrl"/>
       </che-panel>
+      <ng-form name="workspaceInformationForm">
+      <che-panel che-title="Workspace">
+        <che-input che-form="workspaceInformationForm"
+                   che-name="name"
+                   che-label-name="Name"
+                   che-place-holder="Name of the workspace"
+                   ng-model="createFactoryCtrl.factoryObject.workspace.name"
+                   required
+                   ng-minlength="3"
+                   ng-maxlength="20"
+                   ng-pattern="/^[A-Za-z0-9_\-\.]+$/">
+          <div ng-message="required">A name is required.</div>
+          <div ng-message="pattern">Workspace name may contain digits, latin letters, _ , . , - and should start only with digits, latin
+            letters or underscores
+          </div>
+          <div ng-message="minlength">The name has to be more then 3 characters long.</div>
+          <div ng-message="maxlength">The name has to be less than 20 characters long.</div>
+        </che-input>
+        <che-workspace-ram-allocation-slider ng-model="createFactoryCtrl.factoryObject.workspace.environments[0].machineConfigs[0].limits.ram"></che-workspace-ram-allocation-slider>
+      </che-panel>
+        </ng-form>
+
 
       <che-panel che-title="Configure Commands"
                  che-tooltip="Commands are processes that are invoked by users from a dropdown in the IDE.">

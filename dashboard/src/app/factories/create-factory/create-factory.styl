@@ -35,19 +35,21 @@ che-button-primary#create-factory-next-button button
   font-size 1.2em
   width calc(100% - 48px) !important
 
+//  box-shadow 0 1px 1px 0 $primary-color
+
 .create-factory-share-header-widget
   border-top 1px solid $primary-color
-  box-shadow 0 1px 1px 0 $primary-color
+  box-shadow-simple()
   padding-left 24px
   padding-right 24px
   padding-bottom 0px
   min-height 80px !important
   max-height 80px !important
-  background-color #E6F1F5
+  background-color $background-color
   z-index 4
 
 .create-factory-share-header-widget-title
-  font-size 1.3em
+  font-size 1em
 
 .create-factory-share-header-widget-badge
   margin-left 20px
@@ -55,13 +57,17 @@ che-button-primary#create-factory-next-button button
 
 .create-factory-share-header-widget-markdown
   text-align center
+  height 18px
+  font-size 0.9em
+  margin-right 15px
+  border-radius 4px
 
 .create-factory-share-header-widget-clipboard
   font-size 1.3em
 
 .create-factory-share-header-widget-icon
   font-size 3em
-  color $primary-color
+  color $default-dark-color
   margin-right 20px
 
 md-card.create-factory-factory-information-card
@@ -81,3 +87,18 @@ md-tabs.factory-select-source-details:not(.md-no-tab-content):not(.md-dynamic-he
 
 md-tabs.factory-select-source-details md-tab-content > div:first-child
   height 100% !important
+
+
+.create-factory-share-header-small-button
+  margin-right 15px
+  padding 0 15px
+  font-size 9pt
+  cursor pointer
+  height 18px
+  background-color $default-color
+  color $label-secondary-color
+  border-radius 2px
+
+.create-factory-share-header-small-button:hover
+  color $label-secondary-color
+  text-decoration none

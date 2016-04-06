@@ -113,16 +113,12 @@ export class CreateFactoryCtrl {
 
     promise.then((factory) => {
       this.isImporting = false;
-      this.factoryContent = factory;
 
       this.lodash.find(factory.links, (link) => {
         if (link.rel === 'accept' || link.rel === 'accept-named') {
           this.factoryLink = link.href;
         }
       });
-
-      // delete links to make factory shorter
-      delete factory.links;
 
       var parser = document.createElement('a');
       parser.href = this.factoryLink;
