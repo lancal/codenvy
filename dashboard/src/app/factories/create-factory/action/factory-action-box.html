@@ -1,16 +1,15 @@
 <div class="factory-actions-panel-box" layout="column">
 
-  <div class="factory-actions-panel-box-title">{{factoryActionBoxCtrl.lifecycle}}</div>
+  <div class="factory-actions-panel-box-title">{{factoryActionBoxCtrl.actionTitle}}</div>
 
   <div>
-    <div layout-align="center center">
-      <md-button class="md-fab" aria-label="add command" ng-click="factoryActionBoxCtrl.addAction($event);">
-        <span class="fa fa-plus"></span>
-      </md-button>
-      Add Factory Action
+    <div layout="row" layout-align="center center">
+      <che-button-primary che-button-title="Add Factory Action"
+                          ng-click="factoryActionBoxCtrl.addAction($event);"></che-button-primary>
     </div>
   </div>
 
+  <md-divider ng-if="factoryActionBoxCtrl.factoryObject.ide[factoryActionBoxCtrl.lifecycle].actions.length > 0"></md-divider>
   <div ng-repeat="action in factoryActionBoxCtrl.factoryObject.ide[factoryActionBoxCtrl.lifecycle].actions">
     <!-- open File -->
     <cdvy-factory-action cdvy-action-group="{{factoryActionBoxCtrl.lifecycle}}"

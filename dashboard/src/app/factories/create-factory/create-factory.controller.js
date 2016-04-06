@@ -35,6 +35,10 @@ export class CreateFactoryCtrl {
     this.isLoading = false;
     this.isImporting = false;
 
+    // once source is selected, go into edit mode
+    this.title = 'Factory Create Wizard';
+    this.flow = 'init';
+
     this.factoryContent = null;
     $scope.$watch('createFactoryCtrl.factoryContent', (newValue) => {
       this.factoryObject = angular.fromJson(newValue);
@@ -97,19 +101,55 @@ export class CreateFactoryCtrl {
     if (!factoryContent) {
       return;
     }
+
+    // go into configure mode
+    this.flow = 'configure';
+
+    this.title = 'Configure Factory';
+
     this.isImporting = true;
 
     let promise = this.codenvyAPI.getFactory().createFactoryByContent(factoryContent);
 
     promise.then((factory) => {
       this.isImporting = false;
-      this.cheNotification.showInfo('Factory successfully created.');
-      this.$location.path('/factory/' + factory.id);
+      this.factoryContent = factory;
+
+      this.lodash.find(factory.links, (link) => {
+        if (link.rel === 'accept' || link.rel === 'accept-named') {
+          this.factoryLink = link.href;
+        }
+      });
+
+      // delete links to make factory shorter
+      delete factory.links;
+
+      var parser = document.createElement('a');
+      parser.href = this.factoryLink;
+
+      this.factoryBadgeUrl = parser.protocol + '//' + parser.hostname + '/factory/resources/codenvy-contribute.svg';
+
+      this.markdown = '[![Contribute](' + this.factoryBadgeUrl + ')](' + this.factoryLink + ')';
     }, (error) => {
       this.isImporting = false;
       this.cheNotification.showError(error.data.message ? error.data.message : 'Create factory failed.');
       console.log('error', error);
     });
+  }
+
+
+  initFlow() {
+    this.flow = 'source';
+    this.title = 'New Factory';
+
+  }
+
+  /**
+   * Flow of creating a factory is finished, we can redirect to details of factory
+   */
+  finishFlow() {
+    this.cheNotification.showInfo('Factory successfully created.');
+    this.$location.path('/factory/' + this.factoryObject.id);
   }
 
   setStackTab(tabName) {

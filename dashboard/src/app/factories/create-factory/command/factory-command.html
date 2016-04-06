@@ -29,9 +29,9 @@
         <div ng-message="minlength">The name has to be more than 1 character long.</div>
         <div ng-message="maxlength">The name has to be less than 500 characters long.</div>
       </che-input>
-      <md-button class="md-fab" aria-label="add command" ng-click="factoryCommandCtrl.addCommand()" ng-disabled="commandsForm.$invalid">
-        <span class="fa fa-plus"></span>
-      </md-button>
+      <che-button-primary che-button-title="Add Command"
+                          ng-click="factoryCommandCtrl.addCommand()"
+                          ng-disabled="commandsForm.$invalid"></che-button-primary>
     </div>
 
     <div ng-if="factoryCommandCtrl.factoryObject.workspace.commands.length > 0">
